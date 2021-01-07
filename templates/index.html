@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>House Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/main.css">
+    <link rel="stylesheet" href="/bootstrap/util.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body class="bg-gradient-warning">
+    <br>
+    <br>
+    <br>
+    <form class="mx-md-n5" action="{{url_for('predict')}}" method="POST">
+
+        <H1 class="font-italic">
+            <center>House Prediction</center>
+        </H1>
+
+        <p style="color: #ff0000; position:center ; text-align:center;">{{Predicted_House}}</p>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-5 align-text">    
+                    <div class="form-group">
+                        <input id="longitude" type="text" name="longitude" class="form-control" placeholder="longitude" />
+                        <br> <input id="latitude" type="text" name="latitude" class="form-control" placeholder="latitude" />
+                    </div> 
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <input id="housing_median_age" type="text" name="housing_median_age" class="form-control"
+                        placeholder="housing_median_age" />
+                    <br> <input id="total_rooms" type="text" name="total_rooms" class="form-control"
+                        placeholder="total_rooms" />
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <input id="total_bedroom" type="text" name="total_bedrooms" class="form-control"
+                        placeholder="total_bedrooms" />
+                    <br> <input id="population" type="text" name="population" class="form-control"
+                        placeholder="population" />
+                    <br> <input id="median_income" type="text" name="median_income" class="form-control"
+                        placeholder="median_income" />
+
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <input id="housing_median_age" type="text" name="housing_median_age" class="form-control"
+                        placeholder="housing_median_age" />
+                    <br> <input id="total_rooms" type="text" name="total_rooms" class="form-control"
+                        placeholder="total_rooms" />
+                    <br> <input id="households" type="text" name="households" class="form-control"
+                        placeholder="households" />
+
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label>Ocean proximity</label>
+                    <select class="form-control" id="ocean_proximity" name="ocean_proximity">
+
+                        <option value="ISLAND">INLAND</option>
+                        <option value="ISLAND">ISLAND</option>
+                        <option value="NEAR OCEAN">NEAR OCEAN</option>
+                        <option value="NEAR BAY">NEAR BAY</option>
+                        <option value="1H OCEAN">1H OCEAN</option>
+                    </select>
+                </div>
+            </div>
+            
+        </div>
+        <div>
+            <center>
+                <input class="btn btn-success" type="submit" value="Submit" />
+            </center>
+        </div>
+
+
+
+    </form>
+
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $('#submit').click(function (event) {
+            event.preventDefault();
+            var exist_response = $.ajax({
+                type: "GET", url: "http://13.250.101.192/predict", data: "longitude=" + $('#longitude').val()
+                    + "&latitude=" + $('#latitude').val() + "&housing_median_age=" + $('#housing_median_age').val()
+                    + "&total_rooms=" + $('#total_rooms').val() + "&total_bedrooms=" + $('#total_bedrooms').val()
+                    + "&population=" + $('#population').val() + "&households=" + $('#households').val()
+                    + "&median_income=" + $('#median_income').val() + "&ocean_proximity=" + $('#ocean_proximity').val(), async: false
+            }).responseText;
+
+        });
+    </script>
+</body>
+
+</html>
